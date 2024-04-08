@@ -26,6 +26,9 @@
 		methods: {
 			getSecretKey() {
 				let currentDate = new Date();
+				if (currentDate.getHours() >= 20) {
+					currentDate.setDate(currentDate.getDate() + 1);
+				}
 				currentDate.setHours(8, 0, 0, 0);
 				let secretKey = btoa(currentDate.getTime() / 1000);
 				console.log('secretKey', secretKey)
