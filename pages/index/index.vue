@@ -1,8 +1,8 @@
 <template>
 	<view class="content">
-		<image class="logo" src="/static/logo.png"></image>
-		<view class="text-area">
-			<text class="title">{{title}}</text>
+		<view class="text-area" @click="handleClick">
+			<text class="title">{{secretKey}}</text>
+			<text class="tip">点击快捷复制</text>
 		</view>
 	</view>
 </template>
@@ -11,14 +11,31 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+				timer: null,
+				secretKey: "",
+				checkPeriod: 3 * 1000
 			}
 		},
-		onLoad() {
-
+		onShow() {
+			this.getSecretKey()
+			this.timer && clearInterval(this.timer)
+			this.timer = setInterval(() => {
+				this.getSecretKey()
+			}, this.checkPeriod)
 		},
 		methods: {
-
+			getSecretKey() {
+				let currentDate = new Date();
+				currentDate.setHours(12, 0, 0, 0);
+				let secretKey = btoa(currentDate.getTime() / 1000);
+				console.log('secretKey', secretKey)
+				this.secretKey = secretKey
+			},
+			handleClick() {
+				uni.setClipboardData({
+					data:	this.secretKey
+				})
+			}
 		}
 	}
 </script>
@@ -31,22 +48,22 @@
 		justify-content: center;
 	}
 
-	.logo {
-		height: 200rpx;
-		width: 200rpx;
-		margin-top: 200rpx;
-		margin-left: auto;
-		margin-right: auto;
-		margin-bottom: 50rpx;
-	}
-
 	.text-area {
+		margin-top: 200rpx;
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
+		align-items: center;
 	}
 
 	.title {
 		font-size: 36rpx;
-		color: #8f8f94;
+		color: #333;
+	}
+	
+	.tip {
+		font-size: 24rpx;
+		color: #999;
+		margin-top: 24rpx;
 	}
 </style>
