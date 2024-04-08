@@ -13,7 +13,7 @@
 			return {
 				timer: null,
 				secretKey: "",
-				checkPeriod: 3 * 1000
+				checkPeriod: 3 * 1000,
 			}
 		},
 		onShow() {
@@ -26,7 +26,7 @@
 		methods: {
 			getSecretKey() {
 				let currentDate = new Date();
-				currentDate.setHours(12, 0, 0, 0);
+				currentDate.setHours(8, 0, 0, 0);
 				let secretKey = btoa(currentDate.getTime() / 1000);
 				console.log('secretKey', secretKey)
 				this.secretKey = secretKey
@@ -59,11 +59,11 @@
 	.title {
 		font-size: 36rpx;
 		color: #333;
+		margin: 24rpx 0;
 	}
 	
 	.tip {
 		font-size: 24rpx;
 		color: #999;
-		margin-top: 24rpx;
 	}
 </style>
