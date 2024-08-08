@@ -1,5 +1,5 @@
 {
-    "name" : "ks-secret",
+    "name" : "kszhb-secret",
     "appid" : "__UNI__DF127CE",
     "description" : "",
     "versionName" : "1.0.0",
@@ -72,7 +72,7 @@
     "h5" : {
         "router" : {
             "mode" : "history",
-            "base" : "/ks-secret/"
+            "base" : "/kszhb-secret/"
         },
         "template" : ""
     }
